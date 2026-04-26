@@ -4,6 +4,7 @@ import { signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth, googleProvider } from '../../firebase';
 const Layout = () => {
   const [user, setUser] = useState(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -45,8 +46,13 @@ const Layout = () => {
         </nav>
         
         <div className="flex items-center gap-4">
-          <button className="md:hidden text-slate-100 p-2 hover:bg-white/10 rounded-full transition-all">
-            <span className="material-symbols-outlined">menu</span>
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden text-slate-100 p-2 hover:bg-white/10 rounded-full transition-all"
+          >
+            <span className="material-symbols-outlined">
+              {isMobileMenuOpen ? 'close' : 'menu'}
+            </span>
           </button>
           {user ? (
             <div className="hidden md:flex items-center gap-4">
@@ -68,6 +74,39 @@ const Layout = () => {
           )}
         </div>
       </header>
+
+      {/* Mobile Navigation Menu */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 top-[72px] bg-[#0a192f]/95 backdrop-blur-3xl z-40 md:hidden border-t border-white/10">
+          <nav className="flex flex-col p-8 gap-6">
+            <Link onClick={() => setIsMobileMenuOpen(false)} to="/" className="font-headline uppercase tracking-widest text-xl text-slate-300 font-medium hover:text-secondary transition-colors">Home</Link>
+            <Link onClick={() => setIsMobileMenuOpen(false)} to="/timeline" className="font-headline uppercase tracking-widest text-xl text-slate-300 font-medium hover:text-secondary transition-colors">Timeline</Link>
+            <Link onClick={() => setIsMobileMenuOpen(false)} to="/chat" className="font-headline uppercase tracking-widest text-xl text-slate-300 font-medium hover:text-secondary transition-colors">Chat</Link>
+            <Link onClick={() => setIsMobileMenuOpen(false)} to="/quiz" className="font-headline uppercase tracking-widest text-xl text-slate-300 font-medium hover:text-secondary transition-colors">Quiz</Link>
+            
+            <div className="h-px bg-white/10 my-4"></div>
+            
+            {!user ? (
+              <button 
+                onClick={() => { handleSignIn(); setIsMobileMenuOpen(false); }}
+                className="flex justify-center items-center gap-2 bg-secondary text-on-secondary px-6 py-3 rounded-full font-bold uppercase tracking-widest"
+              >
+                Sign In
+              </button>
+            ) : (
+              <div className="flex flex-col gap-4">
+                <span className="text-lg font-headline text-on-surface-variant font-bold">Hi, {user.displayName}</span>
+                <button 
+                  onClick={() => { handleSignOut(); setIsMobileMenuOpen(false); }}
+                  className="bg-primary text-on-primary px-6 py-3 rounded-full font-bold uppercase tracking-widest text-center"
+                >
+                  Sign Out
+                </button>
+              </div>
+            )}
+          </nav>
+        </div>
+      )}
 
       {/* Main Content */}
       <Outlet />
