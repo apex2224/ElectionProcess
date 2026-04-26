@@ -14,6 +14,7 @@ const Chat = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showHistoryModal, setShowHistoryModal] = useState(false);
   const [showClearModal, setShowClearModal] = useState(false);
+  const [showUploadModal, setShowUploadModal] = useState(false);
 
   const handleDeleteMessage = (idToDelete) => {
     setMessages((prev) => prev.filter(msg => msg.id !== idToDelete));
@@ -190,7 +191,7 @@ const Chat = () => {
             <div className="p-4 md:p-6 bg-[#1b3656]/80 backdrop-blur-[24px] rounded-b-xl border-t border-white/10 relative z-20">
               <div className="flex items-center gap-2 md:gap-4 bg-surface-container-lowest/80 p-2 pl-4 md:pl-6 rounded-full border border-white/5 shadow-inner">
                 <button 
-                  onClick={() => alert("File upload is temporarily restricted for security clearance.")}
+                  onClick={() => setShowUploadModal(true)}
                   title="Attach File"
                   className="text-outline hover:text-secondary transition-colors hidden sm:block"
                 >
@@ -288,6 +289,21 @@ const Chat = () => {
                 setShowClearModal(false);
               }} className="flex-1 py-3.5 rounded-xl bg-error text-white hover:bg-error/90 transition-all font-bold text-sm shadow-[0_0_20px_rgba(239,68,68,0.4)]">Confirm Purge</button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Upload Restricted Modal */}
+      {showUploadModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-background/80 backdrop-blur-md animate-fade-in">
+          <div className="bg-surface-container-highest border border-secondary/30 rounded-3xl w-full max-w-sm overflow-hidden shadow-[0_0_50px_rgba(240,193,44,0.15)] text-center p-8 relative">
+            <button onClick={() => setShowUploadModal(false)} className="absolute top-4 right-4 text-outline hover:text-white transition-colors"><span className="material-symbols-outlined">close</span></button>
+            <div className="w-20 h-20 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
+              <span className="material-symbols-outlined text-secondary text-4xl">lock</span>
+            </div>
+            <h3 className="text-2xl font-headline font-bold text-on-surface mb-3">Upload Restricted</h3>
+            <p className="text-on-surface-variant mb-8 text-sm leading-relaxed">Direct document uploads are temporarily restricted for security clearance. The Intelligence Engine currently only accepts text-based queries.</p>
+            <button onClick={() => setShowUploadModal(false)} className="w-full py-3.5 rounded-xl bg-secondary text-on-secondary hover:brightness-110 transition-all font-bold text-sm shadow-[0_0_20px_rgba(240,193,44,0.4)]">Understood</button>
           </div>
         </div>
       )}
