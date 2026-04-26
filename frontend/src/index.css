@@ -54,10 +54,10 @@
   --radius-xl: 3rem;
   --radius-full: 9999px;
 
-  --font-headline: "Manrope", sans-serif;
-  --font-display: "Manrope", sans-serif;
-  --font-body: "Inter", sans-serif;
-  --font-label: "Inter", sans-serif;
+  --font-headline: "Figtree", sans-serif;
+  --font-display: "Figtree", sans-serif;
+  --font-body: "Figtree", sans-serif;
+  --font-label: "Figtree", sans-serif;
 }
 
 @layer base {

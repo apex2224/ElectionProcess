@@ -7,6 +7,7 @@ const Quiz = () => {
   const [isChecking, setIsChecking] = useState(false);
   const [score, setScore] = useState(0);
   const [questionCount, setQuestionCount] = useState(1);
+  const [showReportModal, setShowReportModal] = useState(false);
 
   const fetchQuiz = async () => {
     setIsLoading(true);
@@ -33,7 +34,10 @@ const Quiz = () => {
   };
 
   useEffect(() => {
-    fetchQuiz();
+    const timer = setTimeout(() => {
+      fetchQuiz();
+    }, 10);
+    return () => clearTimeout(timer);
   }, []);
 
   const handleOptionClick = (optionString) => {
@@ -183,7 +187,7 @@ const Quiz = () => {
 
         {/* Actions */}
         <div className="mt-12 flex justify-between items-center gap-6">
-          <button className="font-label text-outline hover:text-primary transition-colors flex items-center gap-2 font-bold uppercase tracking-widest text-xs">
+          <button onClick={() => setShowReportModal(true)} className="font-label text-outline hover:text-primary transition-colors flex items-center gap-2 font-bold uppercase tracking-widest text-xs">
             <span className="material-symbols-outlined text-sm">flag</span>
             Report Question
           </button>
@@ -201,6 +205,21 @@ const Quiz = () => {
       {/* Ambient Light Effects */}
       <div className="fixed top-0 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none -z-10"></div>
       <div className="fixed bottom-0 right-1/4 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+
+      {/* Report Modal */}
+      {showReportModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-background/80 backdrop-blur-md animate-fade-in">
+          <div className="bg-surface-container-highest border border-secondary/30 rounded-3xl w-full max-w-sm overflow-hidden shadow-[0_0_50px_rgba(240,193,44,0.15)] text-center p-8 relative">
+            <button onClick={() => setShowReportModal(false)} className="absolute top-4 right-4 text-outline hover:text-white transition-colors"><span className="material-symbols-outlined">close</span></button>
+            <div className="w-20 h-20 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
+              <span className="material-symbols-outlined text-secondary text-4xl">flag</span>
+            </div>
+            <h3 className="text-2xl font-headline font-bold text-on-surface mb-3">Question Reported</h3>
+            <p className="text-on-surface-variant mb-8 text-sm leading-relaxed">Thank you for maintaining the integrity of our Civic Knowledge Protocol. Our AI moderation team will review this inquiry.</p>
+            <button onClick={() => setShowReportModal(false)} className="w-full py-3.5 rounded-xl bg-secondary text-on-secondary hover:brightness-110 transition-all font-bold text-sm shadow-[0_0_20px_rgba(240,193,44,0.4)]">Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

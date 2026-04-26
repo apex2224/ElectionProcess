@@ -32,7 +32,7 @@ const Layout = () => {
   return (
     <div className="min-h-screen bg-background text-on-background font-body">
       {/* TopAppBar */}
-      <header className="fixed top-0 w-full flex justify-between items-center px-8 py-4 max-w-[1440px] left-1/2 -translate-x-1/2 bg-[#1b3656]/80 backdrop-blur-[24px] z-50 border-b border-white/5">
+      <header className="fixed top-0 w-full flex justify-between items-center px-8 py-4 max-w-[1440px] left-1/2 -translate-x-1/2 bg-[#1b3656]/80 backdrop-blur-[24px] z-50 border-b border-white/5 rounded-b-[2rem] shadow-xl">
         <Link to="/" className="flex items-center gap-2">
           <span className="material-symbols-outlined text-secondary text-2xl">insights</span>
           <h1 className="text-2xl font-black text-secondary tracking-tighter font-headline">ElectionIQ</h1>
@@ -110,6 +110,21 @@ const Layout = () => {
 
       {/* Main Content */}
       <Outlet />
+
+      {/* Global Civic Duty Banner */}
+      <div className="max-w-[1440px] mx-auto px-6 mt-20">
+        <div className="bg-secondary/10 border border-secondary/20 rounded-[2rem] p-8 md:p-10 text-center shadow-[0_0_40px_rgba(240,193,44,0.1)] relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+          <span className="material-symbols-outlined text-secondary text-5xl mb-4 relative z-10">how_to_vote</span>
+          <h3 className="text-2xl md:text-3xl font-headline font-black text-secondary mb-4 relative z-10">Vote Dena Hamari Duty Hai</h3>
+          <p className="text-on-surface-variant text-base md:text-lg leading-relaxed max-w-4xl mx-auto font-body relative z-10">
+            Kisi ke pressure mein aakar ya kisi dusre ko dekh kar vote na karein. Apne adhikar ka sahi aur azaad istemaal karein. Agar aapko lagta hai ki koi bhi umeedwar sahi nahi hai, toh <strong>NOTA</strong> (None of the Above) choose karne ka adhikar bhi aapke paas hai.
+            <br/><br/>
+            <span className="font-black text-secondary tracking-widest uppercase text-xl mt-2 inline-block">Jai Hind, Jai Bharat 🇮🇳</span>
+          </p>
+        </div>
+      </div>
 
       {/* Footer */}
       <footer className="bg-surface-container-low rounded-t-[3rem] mt-20 w-full py-12 px-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center border-t border-white/5 max-w-[1440px] mx-auto">
