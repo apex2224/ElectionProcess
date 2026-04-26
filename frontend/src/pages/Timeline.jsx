@@ -3,7 +3,7 @@ import { useState } from 'react';
 const electionCycles = {
   "lok-sabha-2024": {
     title: "Lok Sabha 2024",
-    subtitle: "Prime Minister Election",
+    subtitle: "18th Prime Minister Election",
     events: [
       { date: "Mar 16", icon: "campaign", title: "Notification", desc: "ECI announces the schedule for the 18th Lok Sabha elections." },
       { date: "Apr 19", icon: "how_to_vote", title: "Phase 1 Polling", desc: "Voting begins across 102 constituencies in 21 states." },
@@ -13,12 +13,62 @@ const electionCycles = {
   },
   "lok-sabha-2019": {
     title: "Lok Sabha 2019",
-    subtitle: "Prime Minister Election",
+    subtitle: "17th Prime Minister Election",
     events: [
       { date: "Mar 10", icon: "campaign", title: "Notification", desc: "ECI announces the schedule for the 17th Lok Sabha elections." },
       { date: "Apr 11", icon: "how_to_vote", title: "Phase 1 Polling", desc: "Voting begins across 91 constituencies." },
       { date: "May 19", icon: "how_to_vote", title: "Phase 7 Polling", desc: "Final phase of voting concludes." },
       { date: "May 23", icon: "leaderboard", title: "Counting", desc: "Votes are counted and the NDA retains power." }
+    ]
+  },
+  "lok-sabha-2014": {
+    title: "Lok Sabha 2014",
+    subtitle: "16th Prime Minister Election",
+    events: [
+      { date: "Mar 5", icon: "campaign", title: "Notification", desc: "ECI announces the schedule for the 16th Lok Sabha elections." },
+      { date: "Apr 7", icon: "how_to_vote", title: "Polling Begins", desc: "9-phase voting process starts." },
+      { date: "May 12", icon: "how_to_vote", title: "Polling Ends", desc: "Record-breaking 66.4% voter turnout recorded." },
+      { date: "May 16", icon: "leaderboard", title: "Counting", desc: "NDA wins with a historic majority, forming the government." }
+    ]
+  },
+  "lok-sabha-1999": {
+    title: "Lok Sabha 1999",
+    subtitle: "13th Prime Minister Election (Post-Kargil)",
+    events: [
+      { date: "Jul 11", icon: "campaign", title: "Notification", desc: "Elections called after the fall of the previous government." },
+      { date: "Sep 5", icon: "how_to_vote", title: "Polling Begins", desc: "Voting starts shortly after the Kargil conflict." },
+      { date: "Oct 3", icon: "how_to_vote", title: "Polling Ends", desc: "Month-long electoral process concludes." },
+      { date: "Oct 6", icon: "leaderboard", title: "Counting", desc: "NDA secures a stable majority to form the government." }
+    ]
+  },
+  "lok-sabha-1977": {
+    title: "Lok Sabha 1977",
+    subtitle: "6th Prime Minister Election (Post-Emergency)",
+    events: [
+      { date: "Jan 18", icon: "campaign", title: "Emergency Lifted", desc: "Elections called shortly after the lifting of the Emergency." },
+      { date: "Mar 16", icon: "how_to_vote", title: "Polling Begins", desc: "A massive wave of voting across the nation." },
+      { date: "Mar 20", icon: "how_to_vote", title: "Polling Ends", desc: "High voter turnout observed." },
+      { date: "Mar 22", icon: "leaderboard", title: "Counting", desc: "Historic shift in power as the Janata Party wins." }
+    ]
+  },
+  "lok-sabha-1951": {
+    title: "Lok Sabha 1951-52",
+    subtitle: "1st General Elections of Independent India",
+    events: [
+      { date: "Oct 25, 1951", icon: "campaign", title: "Polling Begins", desc: "The first ever democratic election of independent India starts in Himachal Pradesh." },
+      { date: "Dec 1951", icon: "how_to_vote", title: "Mass Voting", desc: "Millions vote for the first time using ballot boxes of different colors." },
+      { date: "Feb 21, 1952", icon: "how_to_vote", title: "Polling Ends", desc: "The 4-month long electoral exercise comes to an end." },
+      { date: "May 13, 1952", icon: "leaderboard", title: "First Session", desc: "The first Lok Sabha officially convenes." }
+    ]
+  },
+  "state-up-2022": {
+    title: "Uttar Pradesh 2022",
+    subtitle: "Chief Minister Election",
+    events: [
+      { date: "Jan 8", icon: "campaign", title: "Notification", desc: "ECI announces 7-phase election for UP Assembly." },
+      { date: "Feb 10", icon: "how_to_vote", title: "Phase 1", desc: "Polling begins in Western UP." },
+      { date: "Mar 7", icon: "how_to_vote", title: "Phase 7", desc: "Final phase of voting concludes." },
+      { date: "Mar 10", icon: "leaderboard", title: "Counting", desc: "BJP retains power with absolute majority." }
     ]
   },
   "state-assembly-recent": {
@@ -59,11 +109,22 @@ const Timeline = () => {
               <select 
                 value={selectedCycle}
                 onChange={(e) => setSelectedCycle(e.target.value)}
-                className="w-full appearance-none bg-surface-variant/40 border border-white/10 text-on-surface font-headline font-bold text-lg rounded-xl px-6 py-4 outline-none focus:border-secondary transition-colors cursor-pointer"
+                className="w-full appearance-none bg-surface-variant/40 border border-white/10 text-on-surface font-headline font-bold text-base md:text-lg rounded-xl px-4 md:px-6 py-4 outline-none focus:border-secondary transition-colors cursor-pointer"
               >
-                <option value="lok-sabha-2024" className="bg-[#0a192f]">Lok Sabha 2024 (PM)</option>
-                <option value="lok-sabha-2019" className="bg-[#0a192f]">Lok Sabha 2019 (PM)</option>
-                <option value="state-assembly-recent" className="bg-[#0a192f]">State Assemblies 2023 (CM)</option>
+                <optgroup label="Recent Lok Sabha (PM)" className="bg-[#0a192f] text-secondary font-bold">
+                  <option value="lok-sabha-2024" className="bg-[#1b3656] text-on-surface">Lok Sabha 2024</option>
+                  <option value="lok-sabha-2019" className="bg-[#1b3656] text-on-surface">Lok Sabha 2019</option>
+                  <option value="lok-sabha-2014" className="bg-[#1b3656] text-on-surface">Lok Sabha 2014</option>
+                </optgroup>
+                <optgroup label="Historic Lok Sabha (PM)" className="bg-[#0a192f] text-secondary font-bold">
+                  <option value="lok-sabha-1999" className="bg-[#1b3656] text-on-surface">Lok Sabha 1999 (Kargil)</option>
+                  <option value="lok-sabha-1977" className="bg-[#1b3656] text-on-surface">Lok Sabha 1977 (Emergency)</option>
+                  <option value="lok-sabha-1951" className="bg-[#1b3656] text-on-surface">Lok Sabha 1951 (First Election)</option>
+                </optgroup>
+                <optgroup label="State Assemblies (CM)" className="bg-[#0a192f] text-secondary font-bold">
+                  <option value="state-assembly-recent" className="bg-[#1b3656] text-on-surface">Recent States (MP, RJ, CG - 2023)</option>
+                  <option value="state-up-2022" className="bg-[#1b3656] text-on-surface">Uttar Pradesh 2022</option>
+                </optgroup>
               </select>
               <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-secondary pointer-events-none">
                 expand_more
