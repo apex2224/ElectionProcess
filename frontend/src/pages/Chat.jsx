@@ -12,6 +12,8 @@ const Chat = () => {
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [showHistoryModal, setShowHistoryModal] = useState(false);
+  const [showClearModal, setShowClearModal] = useState(false);
 
   const handleDeleteMessage = (idToDelete) => {
     setMessages((prev) => prev.filter(msg => msg.id !== idToDelete));
@@ -129,26 +131,16 @@ const Chat = () => {
               </div>
               <div className="flex gap-2">
                 <button 
-                  onClick={() => alert("Historical sync is enabled for the current session.")}
+                  onClick={() => setShowHistoryModal(true)}
                   title="Session History"
                   className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-on-surface-variant transition-colors"
                 >
                   <span className="material-symbols-outlined">history</span>
                 </button>
                 <button 
-                  onClick={() => {
-                    if(window.confirm("Clear entire chat?")) {
-                      setMessages([{
-                        id: 1,
-                        sender: 'ai',
-                        text: 'Greetings. I am the ElectionIQ Intelligence Engine. I have analyzed 4.2 million data points regarding the upcoming cycles. How can I assist your sovereign decision-making today?',
-                        type: 'System Insight',
-                        time: 'Just now'
-                      }]);
-                    }
-                  }}
+                  onClick={() => setShowClearModal(true)}
                   title="Clear History"
-                  className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-on-surface-variant transition-colors"
+                  className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-on-surface-variant hover:text-error transition-colors"
                 >
                   <span className="material-symbols-outlined">delete_sweep</span>
                 </button>
@@ -227,6 +219,78 @@ const Chat = () => {
 
         </div>
       </main>
+
+      {/* History Modal */}
+      {showHistoryModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-background/80 backdrop-blur-md animate-fade-in">
+          <div className="bg-surface-container-high border border-white/10 rounded-2xl w-full max-w-md overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] relative">
+            <button onClick={() => setShowHistoryModal(false)} className="absolute top-4 right-4 text-outline hover:text-white transition-colors"><span className="material-symbols-outlined">close</span></button>
+            <div className="p-6 border-b border-white/5 bg-[#1b3656]/50">
+              <h3 className="text-xl font-headline font-bold text-on-surface flex items-center gap-2">
+                <span className="material-symbols-outlined text-secondary">history</span>
+                Intelligence Archives
+              </h3>
+              <p className="text-sm text-on-surface-variant mt-1">Review previews of past analytical sessions</p>
+            </div>
+            <div className="p-2 max-h-[60vh] overflow-y-auto">
+              {/* Mock Sessions */}
+              <div className="p-4 hover:bg-white/5 cursor-pointer transition-colors border-b border-white/5 flex items-center gap-4 group" onClick={() => { setShowHistoryModal(false); }}>
+                <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                  <span className="material-symbols-outlined text-[20px]">chat</span>
+                </div>
+                <div>
+                  <h4 className="text-on-surface font-bold text-sm">Lok Sabha Demographics 2024</h4>
+                  <p className="text-outline text-xs">Yesterday • 14 Messages Analyzed</p>
+                </div>
+              </div>
+              <div className="p-4 hover:bg-white/5 cursor-pointer transition-colors border-b border-white/5 flex items-center gap-4 group" onClick={() => { setShowHistoryModal(false); }}>
+                <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                  <span className="material-symbols-outlined text-[20px]">security</span>
+                </div>
+                <div>
+                  <h4 className="text-on-surface font-bold text-sm">EVM Security Protocols</h4>
+                  <p className="text-outline text-xs">Oct 24 • 8 Messages Analyzed</p>
+                </div>
+              </div>
+              <div className="p-4 hover:bg-white/5 cursor-pointer transition-colors flex items-center gap-4 group" onClick={() => { setShowHistoryModal(false); }}>
+                <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                  <span className="material-symbols-outlined text-[20px]">monitoring</span>
+                </div>
+                <div>
+                  <h4 className="text-on-surface font-bold text-sm">Exit Poll Predictive Modeling</h4>
+                  <p className="text-outline text-xs">Oct 12 • 22 Messages Analyzed</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Clear Chat Modal */}
+      {showClearModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-background/80 backdrop-blur-md animate-fade-in">
+          <div className="bg-surface-container-highest border border-error/30 rounded-3xl w-full max-w-sm overflow-hidden shadow-[0_0_50px_rgba(239,68,68,0.15)] text-center p-8 relative">
+            <div className="w-20 h-20 bg-error/10 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
+              <span className="material-symbols-outlined text-error text-4xl">delete_sweep</span>
+            </div>
+            <h3 className="text-2xl font-headline font-bold text-on-surface mb-3">Clear Engine Cache?</h3>
+            <p className="text-on-surface-variant mb-8 text-sm leading-relaxed">This will permanently purge the current session's analysis data. This action cannot be undone.</p>
+            <div className="flex gap-4">
+              <button onClick={() => setShowClearModal(false)} className="flex-1 py-3.5 rounded-xl border border-white/10 text-on-surface hover:bg-white/5 transition-colors font-bold text-sm">Cancel</button>
+              <button onClick={() => {
+                setMessages([{
+                  id: 1,
+                  sender: 'ai',
+                  text: 'Greetings. I am the ElectionIQ Intelligence Engine. I have analyzed 4.2 million data points regarding the upcoming cycles. How can I assist your sovereign decision-making today?',
+                  type: 'System Insight',
+                  time: 'Just now'
+                }]);
+                setShowClearModal(false);
+              }} className="flex-1 py-3.5 rounded-xl bg-error text-white hover:bg-error/90 transition-all font-bold text-sm shadow-[0_0_20px_rgba(239,68,68,0.4)]">Confirm Purge</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
