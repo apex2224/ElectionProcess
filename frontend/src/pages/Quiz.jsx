@@ -33,9 +33,7 @@ const Quiz = () => {
   };
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchQuiz();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleOptionClick = (optionString) => {

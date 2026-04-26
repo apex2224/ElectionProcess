@@ -49,8 +49,10 @@ const Timeline = () => {
 
   // Fetch initial data on mount
   useEffect(() => {
-    fetchTimelineData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const timer = setTimeout(() => {
+      fetchTimelineData();
+    }, 10);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
