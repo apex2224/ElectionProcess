@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const Quiz = () => {
   const [quizData, setQuizData] = useState(null);
@@ -33,7 +33,9 @@ const Quiz = () => {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchQuiz();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleOptionClick = (optionString) => {
