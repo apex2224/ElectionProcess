@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "surface-container-highest": "#1b3656",
+                  "outline-variant": "#43474e",
+                  "on-primary-container": "#6f88ad",
+                  "tertiary": "#fdb69a",
+                  "secondary-fixed": "#ffdf90",
+                  "on-tertiary-container": "#b5785f",
+                  "background": "#00142b",
+                  "surface-container-lowest": "#000e23",
+                  "surface-container-high": "#0e2b4b",
+                  "on-secondary-fixed-variant": "#584400",
+                  "primary-fixed": "#d4e3ff",
+                  "primary-container": "#001f3f",
+                  "on-primary": "#163152",
+                  "on-background": "#d4e3ff",
+                  "on-surface": "#d4e3ff",
+                  "surface-tint": "#afc8f0",
+                  "surface-variant": "#1b3656",
+                  "on-primary-fixed-variant": "#2f486a",
+                  "on-surface-variant": "#c4c6cf",
+                  "error-container": "#93000a",
+                  "outline": "#8e9198",
+                  "surface-dim": "#00142b",
+                  "error": "#ffb4ab",
+                  "tertiary-container": "#391303",
+                  "on-tertiary-fixed": "#351002",
+                  "on-secondary-container": "#503d00",
+                  "primary-fixed-dim": "#afc8f0",
+                  "surface-container": "#012040",
+                  "on-secondary": "#3d2e00",
+                  "on-error": "#690005",
+                  "on-secondary-fixed": "#241a00",
+                  "secondary": "#f0c12c",
+                  "tertiary-fixed-dim": "#fdb69a",
+                  "on-tertiary": "#4f2411",
+                  "surface-container-low": "#001c3a",
+                  "inverse-surface": "#d4e3ff",
+                  "on-tertiary-fixed-variant": "#6b3a25",
+                  "primary": "#afc8f0",
+                  "tertiary-fixed": "#ffdbce",
+                  "secondary-container": "#d2a501",
+                  "surface": "#00142b",
+                  "surface-bright": "#203a5b",
+                  "on-primary-fixed": "#001c3a",
+                  "inverse-primary": "#476083",
+                  "on-error-container": "#ffdad6",
+                  "inverse-on-surface": "#163152",
+                  "secondary-fixed-dim": "#f0c12c"
+          },
+          "borderRadius": {
+                  "DEFAULT": "1rem",
+                  "lg": "2rem",
+                  "xl": "3rem",
+                  "full": "9999px"
+          },
+          "fontFamily": {
+                  "headline": ["Manrope"],
+                  "display": ["Manrope"],
+                  "body": ["Inter"],
+                  "label": ["Inter"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .glass-card {
+      background: rgba(27, 54, 86, 0.4);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+    .refractive-edge {
+      box-shadow: inset 1px 1px 0px 0px rgba(175, 200, 240, 0.2);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body min-h-screen selection:bg-secondary/30">
+<!-- TopAppBar Section -->
+<header class="bg-slate-950/60 backdrop-blur-2xl rounded-b-[3rem] sticky top-0 z-50 shadow-2xl shadow-slate-950/50 bg-gradient-to-b from-slate-900/50 to-transparent">
+<div class="flex justify-between items-center w-full px-8 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-amber-400/30">
+<img class="w-full h-full object-cover" data-alt="Portrait of a professional analyst in low light, cinematic lighting, deep blue tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2kG2a0ZwRoWe1HtV4A2tmB2saQtgn4R4tOvAiVke5jfUPyAtPFPEi-kKUAzd4WETHSJLuYDNpvrf8tSqsUhITk-ljS2-QuLgA3zWIqeWj8TqtVW0nMVBGHi29eyrPSXYgt0VAg5OH5EdInXVFfSdEde-g-VNERxgqGKN5PPfEBaJA_Qr2PZ83fqAwiYT7Pc7DZDPnuD-HPuu29WgAgts54Kqs2FJWeETDkwYrf37SRC3TYwTEI2FlWl14QS3z4Gg2yry1e1m63w4"/>
+</div>
+</div>
+<div class="text-2xl font-black tracking-tighter text-amber-400 font-['Manrope']">ElectionIQ</div>
+<button class="text-amber-400 hover:bg-white/5 transition-colors active:scale-95 duration-300 p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</header>
+<main class="max-w-4xl mx-auto px-6 py-12 mb-32">
+<!-- Editorial Grid Header -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12 items-end">
+<div class="md:col-span-7">
+<div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label text-xs font-bold uppercase tracking-widest mb-4">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+          Advanced Civics Module
+        </div>
+<h1 class="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-primary leading-tight tracking-tight">
+          Sovereign <br/>Intelligence Quiz
+        </h1>
+</div>
+<div class="md:col-span-5 text-right hidden md:block">
+<p class="font-label text-outline text-sm leading-relaxed max-w-[240px] ml-auto">
+          Testing your grasp on the intricate mechanisms of the electoral process through AI-curated inquiries.
+        </p>
+</div>
+</div>
+<!-- Progress Intelligence -->
+<div class="mb-10 space-y-3">
+<div class="flex justify-between items-end">
+<span class="font-display font-bold text-lg text-secondary">Question 3 of 10</span>
+<span class="font-label text-sm text-outline-variant">Score: 240 IQ</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[30%] shadow-[0_0_15px_rgba(240,193,44,0.4)]"></div>
+</div>
+</div>
+<!-- Hero Question Card -->
+<section class="relative group mb-8">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
+<div class="relative bg-surface-container-low rounded-xl overflow-hidden refractive-edge">
+<div class="bg-surface-container-highest px-8 py-6">
+<h2 class="font-display font-bold text-2xl text-on-surface">The Institutional Mechanism</h2>
+</div>
+<div class="p-8 md:p-12">
+<p class="font-body text-xl md:text-2xl text-on-surface-variant leading-relaxed">
+            What is the primary role of the <span class="text-secondary font-bold">Electoral College</span> in a presidential election within the United States?
+          </p>
+</div>
+</div>
+</section>
+<!-- Options Asymmetric Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Option 1 -->
+<button class="glass-card refractive-edge rounded-xl p-6 text-left border border-outline-variant/10 hover:bg-surface-container-highest/60 hover:scale-[1.02] active:scale-95 transition-all group">
+<div class="flex items-start gap-4">
+<span class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center font-display font-bold text-secondary text-sm group-hover:bg-secondary group-hover:text-on-secondary transition-colors">A</span>
+<p class="font-body font-medium text-on-surface-variant group-hover:text-on-surface">To serve as a secondary popular vote for legislative positions only.</p>
+</div>
+</button>
+<!-- Option 2 -->
+<button class="glass-card refractive-edge rounded-xl p-6 text-left border border-outline-variant/10 hover:bg-surface-container-highest/60 hover:scale-[1.02] active:scale-95 transition-all group">
+<div class="flex items-start gap-4">
+<span class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center font-display font-bold text-secondary text-sm group-hover:bg-secondary group-hover:text-on-secondary transition-colors">B</span>
+<p class="font-body font-medium text-on-surface-variant group-hover:text-on-surface">A body of electors established by the Constitution to formally cast votes for President and Vice President.</p>
+</div>
+</button>
+<!-- Option 3 -->
+<button class="glass-card refractive-edge rounded-xl p-6 text-left border border-outline-variant/10 hover:bg-surface-container-highest/60 hover:scale-[1.02] active:scale-95 transition-all group">
+<div class="flex items-start gap-4">
+<span class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center font-display font-bold text-secondary text-sm group-hover:bg-secondary group-hover:text-on-secondary transition-colors">C</span>
+<p class="font-body font-medium text-on-surface-variant group-hover:text-on-surface">An advisory board that ensures the popular vote is calculated without foreign interference.</p>
+</div>
+</button>
+<!-- Option 4 -->
+<button class="glass-card refractive-edge rounded-xl p-6 text-left border border-outline-variant/10 hover:bg-surface-container-highest/60 hover:scale-[1.02] active:scale-95 transition-all group">
+<div class="flex items-start gap-4">
+<span class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center font-display font-bold text-secondary text-sm group-hover:bg-secondary group-hover:text-on-secondary transition-colors">D</span>
+<p class="font-body font-medium text-on-surface-variant group-hover:text-on-surface">A direct representative group that mandates the outcome of state-level congressional races.</p>
+</div>
+</button>
+</div>
+<!-- Actions -->
+<div class="mt-12 flex justify-between items-center gap-6">
+<button class="font-label text-outline hover:text-primary transition-colors flex items-center gap-2 font-bold uppercase tracking-widest text-xs">
+<span class="material-symbols-outlined text-sm">flag</span>
+            Report Question
+        </button>
+<button class="bg-secondary text-on-secondary font-display font-extrabold px-10 py-5 rounded-full hover:shadow-[0_0_30px_rgba(240,193,44,0.3)] hover:scale-105 active:scale-90 transition-all flex items-center gap-3">
+          Next Question
+          <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">arrow_forward</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar Section -->
+<nav class="fixed bottom-0 w-full rounded-t-[3rem] z-50 bg-[#1b3656]/60 backdrop-blur-2xl shadow-[0_-10px_40px_rgba(0,0,0,0.4)]">
+<div class="flex justify-around items-center w-full px-6 py-5">
+<!-- Intelligence Tab -->
+<a class="flex flex-col items-center justify-center text-slate-400/80 opacity-60 hover:text-amber-300 transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="analytics">analytics</span>
+<span class="font-['Manrope'] text-[10px] font-bold uppercase tracking-widest">Intelligence</span>
+</a>
+<!-- Quiz Tab (Active) -->
+<a class="flex flex-col items-center justify-center text-amber-400 scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="quiz" style="font-variation-settings: 'FILL' 1;">quiz</span>
+<span class="font-['Manrope'] text-[10px] font-bold uppercase tracking-widest">Quiz</span>
+</a>
+<!-- Insight Tab -->
+<a class="flex flex-col items-center justify-center text-slate-400/80 opacity-60 hover:text-amber-300 transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="query_stats">query_stats</span>
+<span class="font-['Manrope'] text-[10px] font-bold uppercase tracking-widest">Insight</span>
+</a>
+<!-- Ranks Tab -->
+<a class="flex flex-col items-center justify-center text-slate-400/80 opacity-60 hover:text-amber-300 transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="emoji_events">emoji_events</span>
+<span class="font-['Manrope'] text-[10px] font-bold uppercase tracking-widest">Ranks</span>
+</a>
+<!-- Profile Tab -->
+<a class="flex flex-col items-center justify-center text-slate-400/80 opacity-60 hover:text-amber-300 transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="account_circle">account_circle</span>
+<span class="font-['Manrope'] text-[10px] font-bold uppercase tracking-widest">Profile</span>
+</a>
+</div>
+</nav>
+<!-- Ambient Light Effects (Visual decoration for Sovereign theme) -->
+<div class="fixed top-0 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+<div class="fixed bottom-0 right-1/4 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+</body></html>
