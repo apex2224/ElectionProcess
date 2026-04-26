@@ -13,6 +13,10 @@ const Chat = () => {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  const handleDeleteMessage = (idToDelete) => {
+    setMessages((prev) => prev.filter(msg => msg.id !== idToDelete));
+  };
+
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
 
@@ -125,15 +129,15 @@ const Chat = () => {
               </div>
               <div className="flex gap-2">
                 <button 
-                  onClick={() => alert("Engine settings are managed by the Sovereign Administrator.")}
-                  title="Settings"
+                  onClick={() => alert("Historical sync is enabled for the current session.")}
+                  title="Session History"
                   className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-on-surface-variant transition-colors"
                 >
-                  <span className="material-symbols-outlined">settings</span>
+                  <span className="material-symbols-outlined">history</span>
                 </button>
                 <button 
                   onClick={() => {
-                    if(window.confirm("Clear chat history?")) {
+                    if(window.confirm("Clear entire chat?")) {
                       setMessages([{
                         id: 1,
                         sender: 'ai',
@@ -156,8 +160,11 @@ const Chat = () => {
               
               {messages.map((msg) => (
                 msg.sender === 'ai' ? (
-                  <div key={msg.id} className="flex justify-start max-w-[90%] md:max-w-[80%]">
-                    <div className="bg-[#1b3656]/80 backdrop-blur-[24px] border-t border-l border-white/10 p-6 rounded-r-xl rounded-bl-xl shadow-lg">
+                  <div key={msg.id} className="flex justify-start max-w-[90%] md:max-w-[80%] relative group">
+                    <button onClick={() => handleDeleteMessage(msg.id)} className="absolute -top-3 -right-3 opacity-0 group-hover:opacity-100 bg-red-500/80 text-white p-1 rounded-full transition-opacity z-10 hover:bg-red-500 scale-75">
+                      <span className="material-symbols-outlined text-sm">close</span>
+                    </button>
+                    <div className="bg-[#1b3656]/80 backdrop-blur-[24px] border-t border-l border-white/10 p-6 rounded-r-xl rounded-bl-xl shadow-lg w-full">
                       <div className="flex items-center gap-2 mb-3">
                         <span className="px-2 py-0.5 bg-secondary/10 text-secondary text-[10px] font-bold uppercase tracking-tighter rounded">{msg.type || 'System Insight'}</span>
                         <span className="text-[10px] text-outline">{msg.time || 'Just now'}</span>
@@ -166,8 +173,11 @@ const Chat = () => {
                     </div>
                   </div>
                 ) : (
-                  <div key={msg.id} className="flex justify-end ml-auto max-w-[90%] md:max-w-[80%]">
-                    <div className="border border-secondary/50 bg-secondary/5 p-6 rounded-l-xl rounded-br-xl shadow-lg">
+                  <div key={msg.id} className="flex justify-end ml-auto max-w-[90%] md:max-w-[80%] relative group">
+                    <button onClick={() => handleDeleteMessage(msg.id)} className="absolute -top-3 -left-3 opacity-0 group-hover:opacity-100 bg-red-500/80 text-white p-1 rounded-full transition-opacity z-10 hover:bg-red-500 scale-75">
+                      <span className="material-symbols-outlined text-sm">close</span>
+                    </button>
+                    <div className="border border-secondary/50 bg-secondary/5 p-6 rounded-l-xl rounded-br-xl shadow-lg w-full">
                       <p className="text-sm leading-relaxed text-on-surface whitespace-pre-wrap">{msg.text}</p>
                     </div>
                   </div>

@@ -118,8 +118,23 @@ const Layout = () => {
           <p className="text-sm text-slate-400 max-w-sm">
             © 2024 ElectionIQ. Empowering The Sovereign Intelligence. Delivering high-fidelity civic data for the modern era.
           </p>
+          
+          {/* Live State Results Tracker */}
+          <div className="mt-4 inline-block relative w-full max-w-xs">
+            <select className="w-full appearance-none bg-surface-variant/40 border border-white/5 text-secondary font-headline text-sm rounded-lg px-4 py-2 outline-none focus:border-secondary/50 cursor-pointer">
+              <option value="" disabled selected className="bg-[#0a192f]">Live State Results 2024</option>
+              <option value="up" className="bg-[#0a192f]">Uttar Pradesh: BJP (Lead)</option>
+              <option value="dl" className="bg-[#0a192f]">Delhi: AAP/INC (Lead)</option>
+              <option value="ka" className="bg-[#0a192f]">Karnataka: INC (Lead)</option>
+              <option value="mh" className="bg-[#0a192f]">Maharashtra: NDA (Lead)</option>
+              <option value="wb" className="bg-[#0a192f]">West Bengal: AITC (Lead)</option>
+            </select>
+            <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-secondary/50 pointer-events-none text-sm">
+              poll
+            </span>
+          </div>
         </div>
-        <div className="flex flex-wrap gap-x-8 gap-y-4 md:justify-end">
+        <div className="flex flex-wrap gap-x-8 gap-y-4 md:justify-end items-start h-full pt-2">
           <Link to="/" className="text-sm text-slate-500 hover:text-primary underline-offset-4 hover:underline transition-all">Home</Link>
           <Link to="/timeline" className="text-sm text-slate-500 hover:text-primary underline-offset-4 hover:underline transition-all">Timeline</Link>
           <Link to="/chat" className="text-sm text-slate-500 hover:text-primary underline-offset-4 hover:underline transition-all">Chat</Link>

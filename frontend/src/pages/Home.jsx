@@ -35,9 +35,9 @@ const Home = () => {
           <div className="flex-1 relative w-full aspect-square md:aspect-auto">
             <div className="relative w-full h-[400px] md:h-[600px] rounded-xl overflow-hidden glass-refraction bg-surface-variant/20 backdrop-blur-xl shadow-2xl">
               <img 
-                alt="Cybersecurity and data visualization" 
+                alt="Indian Voters at Polling Booth" 
                 className="w-full h-full object-cover mix-blend-overlay opacity-60" 
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop"
+                src="/images/hero.png"
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-primary-container/80 via-transparent to-secondary/10"></div>
               
