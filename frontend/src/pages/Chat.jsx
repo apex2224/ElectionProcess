@@ -124,11 +124,29 @@ const Chat = () => {
                 </div>
               </div>
               <div className="flex gap-2">
-                <button className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-on-surface-variant transition-colors">
+                <button 
+                  onClick={() => alert("Engine settings are managed by the Sovereign Administrator.")}
+                  title="Settings"
+                  className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-on-surface-variant transition-colors"
+                >
                   <span className="material-symbols-outlined">settings</span>
                 </button>
-                <button className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-on-surface-variant transition-colors">
-                  <span className="material-symbols-outlined">history</span>
+                <button 
+                  onClick={() => {
+                    if(window.confirm("Clear chat history?")) {
+                      setMessages([{
+                        id: 1,
+                        sender: 'ai',
+                        text: 'Greetings. I am the ElectionIQ Intelligence Engine. I have analyzed 4.2 million data points regarding the upcoming cycles. How can I assist your sovereign decision-making today?',
+                        type: 'System Insight',
+                        time: 'Just now'
+                      }]);
+                    }
+                  }}
+                  title="Clear History"
+                  className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-on-surface-variant transition-colors"
+                >
+                  <span className="material-symbols-outlined">delete_sweep</span>
                 </button>
               </div>
             </div>
@@ -169,7 +187,11 @@ const Chat = () => {
             {/* Input Area */}
             <div className="p-4 md:p-6 bg-[#1b3656]/80 backdrop-blur-[24px] rounded-b-xl border-t border-white/10 relative z-20">
               <div className="flex items-center gap-2 md:gap-4 bg-surface-container-lowest/80 p-2 pl-4 md:pl-6 rounded-full border border-white/5 shadow-inner">
-                <button className="text-outline hover:text-secondary transition-colors hidden sm:block">
+                <button 
+                  onClick={() => alert("File upload is temporarily restricted for security clearance.")}
+                  title="Attach File"
+                  className="text-outline hover:text-secondary transition-colors hidden sm:block"
+                >
                   <span className="material-symbols-outlined">attach_file</span>
                 </button>
                 <input 
