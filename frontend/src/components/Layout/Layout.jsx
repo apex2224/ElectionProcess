@@ -1,6 +1,33 @@
 import { Outlet, Link } from 'react-router-dom';
-
+import { useState, useEffect } from 'react';
+import { signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
+import { auth, googleProvider } from '../../firebase';
 const Layout = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleSignIn = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+    } catch (error) {
+      console.error('Sign-in failed:', error);
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error('Sign-out failed:', error);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background text-on-background font-body">
       {/* TopAppBar */}
@@ -21,9 +48,24 @@ const Layout = () => {
           <button className="md:hidden text-slate-100 p-2 hover:bg-white/10 rounded-full transition-all">
             <span className="material-symbols-outlined">menu</span>
           </button>
-          <button className="hidden md:block bg-secondary text-on-secondary px-6 py-2 rounded-full font-semibold scale-95 active:scale-90 transition-transform">
-            Sign In
-          </button>
+          {user ? (
+            <div className="hidden md:flex items-center gap-4">
+              <span className="text-sm font-headline text-on-surface-variant font-bold">{user.displayName}</span>
+              <button 
+                onClick={handleSignOut}
+                className="bg-primary text-on-primary px-5 py-2 rounded-full font-semibold text-sm hover:brightness-110 active:scale-95 transition-all"
+              >
+                Sign Out
+              </button>
+            </div>
+          ) : (
+            <button 
+              onClick={handleSignIn}
+              className="hidden md:flex items-center gap-2 bg-secondary text-on-secondary px-6 py-2 rounded-full font-semibold scale-95 active:scale-90 hover:brightness-110 transition-all"
+            >
+              Sign In
+            </button>
+          )}
         </div>
       </header>
 
