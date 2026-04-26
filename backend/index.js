@@ -91,6 +91,51 @@ app.post('/api/quiz/generate', async (req, res) => {
   }
 });
 
+// Timeline Engine Route: Generates historical timeline data
+app.post('/api/timeline', async (req, res) => {
+  try {
+    const { year, region } = req.body;
+    
+    if (!year || !region) {
+      return res.status(400).json({ error: 'Year and region are required' });
+    }
+
+    const prompt = `You are a strict Indian political historian. The user is asking for the election timeline of the ${region} election in the year ${year}.
+    If there was no significant election in that region during that year, provide a brief timeline explaining the political context of that year.
+    Generate a JSON object representing the election cycle. 
+    It MUST have this exact structure:
+    {
+      "title": "Short title, e.g., Lok Sabha 1951 or Uttar Pradesh 2022",
+      "subtitle": "Short subtitle explaining the significance or winner",
+      "events": [
+        { 
+          "date": "Short date, e.g., Mar 16", 
+          "icon": "One of these material symbols: campaign, how_to_vote, fact_check, record_voice_over, leaderboard", 
+          "title": "Event Title", 
+          "desc": "Short description of the event" 
+        }
+      ]
+    }
+    Provide exactly 4 to 6 events in chronological order. Ensure the response is valid JSON and nothing else.`;
+
+    const response = await ai.models.generateContent({
+        model: 'gemini-2.5-flash',
+        contents: prompt,
+        config: {
+            responseMimeType: "application/json",
+            temperature: 0.2, // Low temperature for historical accuracy
+        }
+    });
+    
+    const timelineData = JSON.parse(response.text);
+    res.json(timelineData);
+
+  } catch (error) {
+    console.error('Timeline Generation Error:', error);
+    res.status(500).json({ error: 'Failed to generate timeline data' });
+  }
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'Operational', engine: 'ElectionIQ Backend' });
