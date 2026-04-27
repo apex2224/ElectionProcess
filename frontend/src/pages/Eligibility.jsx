@@ -86,10 +86,12 @@ const Eligibility = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* DOB */}
               <div className="space-y-2">
-                <label className="text-sm font-headline text-slate-300 font-bold uppercase tracking-wider">Date of Birth</label>
+                <label htmlFor="dob-input" className="text-sm font-headline text-slate-300 font-bold uppercase tracking-wider">Date of Birth</label>
                 <input 
+                  id="dob-input"
                   type="date" 
                   required
+                  aria-label="Date of birth"
                   max={new Date().toISOString().split("T")[0]}
                   className="w-full bg-surface-variant/40 border border-white/10 rounded-xl px-4 py-3 text-on-surface focus:outline-none focus:border-secondary transition-colors"
                   value={formData.dob}
@@ -99,8 +101,10 @@ const Eligibility = () => {
 
               {/* Citizenship */}
               <div className="space-y-2">
-                <label className="text-sm font-headline text-slate-300 font-bold uppercase tracking-wider">Citizenship</label>
+                <label htmlFor="citizenship-select" className="text-sm font-headline text-slate-300 font-bold uppercase tracking-wider">Citizenship</label>
                 <select 
+                  id="citizenship-select"
+                  aria-label="Select your citizenship status"
                   className="w-full bg-surface-variant/40 border border-white/10 rounded-xl px-4 py-3 text-on-surface focus:outline-none focus:border-secondary transition-colors appearance-none cursor-pointer"
                   value={formData.citizenship}
                   onChange={(e) => setFormData({...formData, citizenship: e.target.value})}

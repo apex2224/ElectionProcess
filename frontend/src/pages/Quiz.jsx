@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { logAnalyticsEvent } from "../firebase";
 
 const Quiz = () => {
   const [quizData, setQuizData] = useState(null);
@@ -65,6 +66,10 @@ const Quiz = () => {
         setScore((prev) => prev + 100);
       }
       return;
+    }
+
+    if (questionCount >= 10) {
+      logAnalyticsEvent('quiz_completed', { final_score: score });
     }
 
     setQuestionCount((prev) => prev + 1);

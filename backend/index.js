@@ -1,3 +1,10 @@
+/**
+ * @file index.js
+ * @description ElectionIQ Backend — The Sovereign Intelligence Engine.
+ * Provides REST API endpoints for AI-powered civic chat, quiz generation,
+ * and election timeline data using Google Gemini.
+ * @module ElectionIQBackend
+ */
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -15,7 +22,10 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 app.use(cors());
 app.use(express.json());
 
-// Rate Limiting to prevent abuse
+/**
+ * Rate limiter middleware to protect API routes from abuse.
+ * Limits each IP to 100 requests per 15-minute window.
+ */
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // limit each IP to 100 requests per windowMs
@@ -25,16 +35,25 @@ app.use('/api/', apiLimiter);
 
 // --- API Routes ---
 
-// Chat Route: Handles AI Chat Interactions
+/**
+ * @route POST /api/chat
+ * @description Handles AI-powered civic chat queries via Google Gemini.
+ * The AI is constrained to act as the ElectionIQ Intelligence Engine,
+ * providing unbiased and factual responses about the Indian electoral process.
+ * @param {object} req.body - The request body.
+ * @param {string} req.body.message - The user's chat query.
+ * @param {Array}  [req.body.history] - Optional conversation history.
+ * @returns {object} JSON object with `reply` string from the AI.
+ */
 app.post('/api/chat', async (req, res) => {
   try {
-    const { message, history } = req.body;
+    const { message } = req.body;
 
     if (!message) {
       return res.status(400).json({ error: 'Message is required' });
     }
 
-    // Default system prompt to ensure the AI behaves as "The Sovereign Intelligence Advisor"
+    // System prompt constrains AI to act as the Sovereign Intelligence Advisor
     const systemInstruction = `You are the "ElectionIQ Intelligence Engine", also known as "The Sovereign Intelligence Advisor". 
     You are a premium, highly knowledgeable, and authoritative AI assistant that answers questions regarding the electoral process, civic duties, and election analytics.
     Speak in a formal, precise, and tech-forward tone. Do not hallucinate data.`;
@@ -58,7 +77,15 @@ app.post('/api/chat', async (req, res) => {
   }
 });
 
-// Quiz Engine Route: Generates dynamic quiz questions
+/**
+ * @route POST /api/quiz/generate
+ * @description Dynamically generates a multiple-choice civic quiz question
+ * using Google Gemini. Returns the question, options, correct answer, and
+ * an explanation.
+ * @param {object} req.body - The request body.
+ * @param {string} [req.body.topic='electoral process'] - The topic for the quiz question.
+ * @returns {object} JSON object with `question`, `options`, `correctAnswer`, `explanation`.
+ */
 app.post('/api/quiz/generate', async (req, res) => {
   try {
     const { topic = 'electoral process' } = req.body;
@@ -80,8 +107,8 @@ app.post('/api/quiz/generate', async (req, res) => {
             temperature: 0.7,
         }
     });
-    
-    // Parse the JSON response
+
+    // Parse and return the JSON response
     const quizData = JSON.parse(response.text);
     res.json(quizData);
 
@@ -91,11 +118,19 @@ app.post('/api/quiz/generate', async (req, res) => {
   }
 });
 
-// Timeline Engine Route: Generates historical timeline data
+/**
+ * @route POST /api/timeline
+ * @description Generates a structured election timeline for a given year and region
+ * using Google Gemini with historical accuracy constraints.
+ * @param {object} req.body - The request body.
+ * @param {string} req.body.year - The election year (e.g., "2024").
+ * @param {string} req.body.region - The election region (e.g., "Lok Sabha", "Uttar Pradesh").
+ * @returns {object} JSON object with `title`, `subtitle`, and an `events` array.
+ */
 app.post('/api/timeline', async (req, res) => {
   try {
     const { year, region } = req.body;
-    
+
     if (!year || !region) {
       return res.status(400).json({ error: 'Year and region are required' });
     }
@@ -126,7 +161,7 @@ app.post('/api/timeline', async (req, res) => {
             temperature: 0.2, // Low temperature for historical accuracy
         }
     });
-    
+
     const timelineData = JSON.parse(response.text);
     res.json(timelineData);
 
@@ -136,7 +171,11 @@ app.post('/api/timeline', async (req, res) => {
   }
 });
 
-// Health check endpoint
+/**
+ * @route GET /health
+ * @description Health check endpoint to verify the service is running.
+ * @returns {object} JSON object with `status` and `engine` fields.
+ */
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'Operational', engine: 'ElectionIQ Backend' });
 });

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { logAnalyticsEvent } from '../firebase';
 
 const Chat = () => {
   const [messages, setMessages] = useState([
@@ -22,6 +23,9 @@ const Chat = () => {
 
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
+
+    // Log analytics event when user sends a chat message
+    logAnalyticsEvent('chat_message_sent', { query_length: inputValue.length });
 
     const userMessage = {
       id: Date.now(),
@@ -83,7 +87,7 @@ const Chat = () => {
 
   return (
     <div className="selection:bg-secondary/30 min-h-screen">
-      <main className="min-h-screen pt-32 pb-32 md:pb-12 editorial-gradient overflow-x-hidden max-w-screen-2xl mx-auto px-6">
+      <div className="min-h-screen pt-32 pb-32 md:pb-12 editorial-gradient overflow-x-hidden max-w-screen-2xl mx-auto px-6" role="region" aria-label="AI Chat Interface">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Sidebar */}
@@ -130,32 +134,34 @@ const Chat = () => {
                   <p className="text-[10px] md:text-xs text-outline uppercase tracking-widest font-bold">The Sovereign Intelligence Advisor</p>
                 </div>
               </div>
-              <div className="flex gap-2">
+              <div className="flex gap-2" role="toolbar" aria-label="Chat controls">
                 <button 
                   onClick={() => setShowHistoryModal(true)}
+                  aria-label="View session history"
                   title="Session History"
-                  className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-on-surface-variant transition-colors"
+                  className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-on-surface-variant transition-colors focus:outline-none focus:ring-2 focus:ring-secondary"
                 >
-                  <span className="material-symbols-outlined">history</span>
+                  <span className="material-symbols-outlined" aria-hidden="true">history</span>
                 </button>
                 <button 
                   onClick={() => setShowClearModal(true)}
+                  aria-label="Clear chat history"
                   title="Clear History"
-                  className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-on-surface-variant hover:text-error transition-colors"
+                  className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-on-surface-variant hover:text-error transition-colors focus:outline-none focus:ring-2 focus:ring-secondary"
                 >
-                  <span className="material-symbols-outlined">delete_sweep</span>
+                  <span className="material-symbols-outlined" aria-hidden="true">delete_sweep</span>
                 </button>
               </div>
             </div>
 
             {/* Chat Messages */}
-            <div className="flex-grow overflow-y-auto p-6 md:p-8 space-y-8 scrollbar-hide bg-surface-container-lowest/50">
+            <div role="log" aria-label="Chat messages" aria-live="polite" className="flex-grow overflow-y-auto p-6 md:p-8 space-y-8 scrollbar-hide bg-surface-container-lowest/50">
               
               {messages.map((msg) => (
                 msg.sender === 'ai' ? (
-                  <div key={msg.id} className="flex justify-start max-w-[90%] md:max-w-[80%] relative group">
-                    <button onClick={() => handleDeleteMessage(msg.id)} className="absolute -top-3 -right-3 opacity-0 group-hover:opacity-100 bg-red-500/80 text-white p-1 rounded-full transition-opacity z-10 hover:bg-red-500 scale-75">
-                      <span className="material-symbols-outlined text-sm">close</span>
+                  <div key={msg.id} className="flex justify-start max-w-[90%] md:max-w-[80%] relative group" role="article" aria-label="AI response">
+                    <button onClick={() => handleDeleteMessage(msg.id)} aria-label="Delete this message" className="absolute -top-3 -right-3 opacity-0 group-hover:opacity-100 bg-red-500/80 text-white p-1 rounded-full transition-opacity z-10 hover:bg-red-500 scale-75">
+                      <span className="material-symbols-outlined text-sm" aria-hidden="true">close</span>
                     </button>
                     <div className="bg-[#1b3656]/80 backdrop-blur-[24px] border-t border-l border-white/10 p-6 rounded-r-xl rounded-bl-xl shadow-lg w-full">
                       <div className="flex items-center gap-2 mb-3">
@@ -166,9 +172,9 @@ const Chat = () => {
                     </div>
                   </div>
                 ) : (
-                  <div key={msg.id} className="flex justify-end ml-auto max-w-[90%] md:max-w-[80%] relative group">
-                    <button onClick={() => handleDeleteMessage(msg.id)} className="absolute -top-3 -left-3 opacity-0 group-hover:opacity-100 bg-red-500/80 text-white p-1 rounded-full transition-opacity z-10 hover:bg-red-500 scale-75">
-                      <span className="material-symbols-outlined text-sm">close</span>
+                  <div key={msg.id} className="flex justify-end ml-auto max-w-[90%] md:max-w-[80%] relative group" role="article" aria-label="Your message">
+                    <button onClick={() => handleDeleteMessage(msg.id)} aria-label="Delete this message" className="absolute -top-3 -left-3 opacity-0 group-hover:opacity-100 bg-red-500/80 text-white p-1 rounded-full transition-opacity z-10 hover:bg-red-500 scale-75">
+                      <span className="material-symbols-outlined text-sm" aria-hidden="true">close</span>
                     </button>
                     <div className="border border-secondary/50 bg-secondary/5 p-6 rounded-l-xl rounded-br-xl shadow-lg w-full">
                       <p className="text-sm leading-relaxed text-on-surface whitespace-pre-wrap">{msg.text}</p>
@@ -193,33 +199,42 @@ const Chat = () => {
                 <button 
                   onClick={() => setShowUploadModal(true)}
                   title="Attach File"
-                  className="text-outline hover:text-secondary transition-colors hidden sm:block"
+                  aria-label="Attach a file to your message"
+                  className="text-outline hover:text-secondary transition-colors hidden sm:block focus:outline-none focus:ring-2 focus:ring-secondary rounded-full"
                 >
-                  <span className="material-symbols-outlined">attach_file</span>
+                  <span className="material-symbols-outlined" aria-hidden="true">attach_file</span>
                 </button>
-                <input 
-                  className="bg-transparent border-none focus:ring-0 text-sm md:text-base text-on-surface flex-grow py-2 md:py-3 placeholder:text-outline/50 outline-none" 
-                  placeholder="Query the intelligence engine..." 
+                <label htmlFor="chat-input" className="sr-only">Message the AI assistant</label>
+                <input
+                  id="chat-input"
+                  className="bg-transparent border-none focus:ring-0 text-sm md:text-base text-on-surface flex-grow py-2 md:py-3 placeholder:text-outline/50 outline-none"
+                  placeholder="Query the intelligence engine..."
                   type="text"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={handleKeyPress}
                   disabled={isLoading}
+                  aria-label="Chat message input"
+                  aria-describedby="chat-status"
                 />
+                <span id="chat-status" className="sr-only" aria-live="polite">
+                  {isLoading ? 'AI is generating a response...' : 'Ready'}
+                </span>
                 <button 
                   onClick={handleSendMessage}
                   disabled={isLoading || !inputValue.trim()}
-                  className="flex items-center justify-center bg-secondary text-on-secondary px-4 md:px-6 py-2 md:py-3 rounded-full font-black uppercase text-[10px] tracking-widest hover:brightness-110 transition-all active:scale-95 disabled:opacity-50"
+                  aria-label="Send message to AI assistant"
+                  className="flex items-center justify-center bg-secondary text-on-secondary px-4 md:px-6 py-2 md:py-3 rounded-full font-black uppercase text-[10px] tracking-widest hover:brightness-110 transition-all active:scale-95 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-secondary"
                 >
                   <span className="hidden sm:inline">Send</span>
-                  <span className="material-symbols-outlined sm:ml-2 text-sm">send</span>
+                  <span className="material-symbols-outlined sm:ml-2 text-sm" aria-hidden="true">send</span>
                 </button>
               </div>
             </div>
           </section>
 
         </div>
-      </main>
+      </div>
 
       {/* History Modal */}
       {showHistoryModal && (

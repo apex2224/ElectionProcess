@@ -1,0 +1,22 @@
+{
+  "short_name": "ElectionIQ",
+  "name": "ElectionIQ: The Sovereign Intelligence",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#001c3a",
+  "background_color": "#001c3a",
+  "description": "AI-powered civic intelligence platform for the Indian electoral process."
+}
