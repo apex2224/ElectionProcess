@@ -45,13 +45,24 @@ const Quiz = () => {
     setSelectedAnswer(optionString);
   };
 
+  const checkAnswerCorrectness = (selected, correct) => {
+    if (!selected || !correct) return false;
+    const s = selected.toLowerCase().trim();
+    const c = correct.toLowerCase().trim();
+    // Check exact match or if one string is fully contained in another
+    if (s === c || s.includes(c) || c.includes(s)) return true;
+    // Check if they start with the same option letter (e.g., "a:" and "a:")
+    if (s.charAt(0) === c.charAt(0) && s.charAt(1) === ':' && c.charAt(1) === ':') return true;
+    return false;
+  };
+
   const handleNextQuestion = () => {
     if (!selectedAnswer && !isChecking) return;
 
     if (!isChecking) {
       setIsChecking(true);
-      if (selectedAnswer === quizData.correctAnswer) {
-        setScore((prev) => prev + 10);
+      if (checkAnswerCorrectness(selectedAnswer, quizData.correctAnswer)) {
+        setScore((prev) => prev + 100);
       }
       return;
     }
@@ -137,9 +148,9 @@ const Quiz = () => {
                 {quizData.options.map((opt, idx) => {
                   const isSelected = selectedAnswer === opt;
                   const isCorrect =
-                    isChecking && opt === quizData.correctAnswer;
+                    isChecking && checkAnswerCorrectness(opt, quizData.correctAnswer);
                   const isWrongSelected =
-                    isChecking && isSelected && opt !== quizData.correctAnswer;
+                    isChecking && isSelected && !checkAnswerCorrectness(opt, quizData.correctAnswer);
 
                   let btnStyle =
                     "bg-[#1b3656]/40 border-white/10 hover:bg-[#1b3656]/80";

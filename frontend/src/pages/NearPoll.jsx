@@ -14,8 +14,8 @@ const NearPoll = () => {
       return;
     }
     
-    setIsSearching(true);
     const delayDebounceFn = setTimeout(() => {
+      setIsSearching(true);
       fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(search)}&countrycodes=in&format=json&limit=5`)
         .then(res => res.json())
         .then(data => {
