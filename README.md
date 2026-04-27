@@ -19,6 +19,36 @@ We built **ElectionIQ** to solve several critical pain points in the current civ
 
 ---
 
+## 🎯 Hackathon Submission Details
+
+### Chosen Vertical
+**Civic Tech & AI for Social Good** 
+ElectionIQ focuses on democratizing political data, increasing civic engagement, and ensuring transparent information access for citizens using Generative AI.
+
+### Approach and Logic
+Our approach is centered on **Unbiased Intelligence and Centralization**. Instead of users jumping between complicated portals or biased news sites, we centralized data into a single, intuitive interface. We use Google Gemini to act as a neutral "historian" and "advisor," ensuring that answers to civic queries and historical timelines are generated securely, transparently, and free from partisan spin. The logic is to provide instant, verified information—from voter eligibility checks to polling station locations—with minimal friction.
+
+### How the Solution Works
+1. **Interactive AI Chat:** Users ask questions about their voting rights or the electoral process. The Node/Express backend safely queries the Gemini API with structured prompts to guarantee neutral, factual responses.
+2. **Eligibility & Location Engines:** Users enter their Date of Birth or Pincode. The frontend dynamically calculates age using JavaScript date logic, while the Nominatim OpenStreetMap API fetches live geolocation data to plot nearby polling booths on an integrated map.
+3. **Historical Data Generation:** Users select a state and year. The frontend requests Gemini to generate a structured historical timeline, which is then dynamically rendered on the UI without needing a pre-populated static database.
+
+### Assumptions Made
+- We assume users have basic internet access to load the web app.
+- For the "Near Poll Station Locator", we assume the Nominatim open-source API provides accurate geocoding for Indian pincodes and localities.
+- We assume the Gemini model's training data provides accurate historical contexts up to its latest knowledge cutoff.
+- The "Nearby Stations" list uses placeholder structured data derived from the user's searched locality to demonstrate the UX, assuming integration with the official Election Commission booth API would happen in a full production deployment.
+
+### Evaluation Focus Areas Addressed
+- **Code Quality:** Modular React component structure, clean routing, and centralized styling with Tailwind CSS.
+- **Security:** API keys are securely managed via backend environment variables. The app is served over HTTPS via Firebase.
+- **Efficiency:** The backend is stateless, ensuring fast responses. React handles DOM updates efficiently, avoiding cascading renders.
+- **Testing:** Core functionalities (Eligibility logic, AI Chat, Location search) have been validated against edge cases (e.g., users under 18, ambiguous chat questions).
+- **Accessibility:** High contrast dark-mode UI, clear typography (Figtree), and large touch targets for complete mobile responsiveness.
+- **Google Services Integration:** Deep integration of **Google Gemini API** (Core AI Engine), **Firebase Hosting** (Frontend Deployment), and **Google Maps Embeds** (Location Visualization).
+
+---
+
 ## ✨ Key Features
 
 1. **The Sovereign Intelligence Advisor (AI Chat)**
