@@ -2,69 +2,70 @@
 
 **Live Demo**: [https://testing-f5157.web.app](https://testing-f5157.web.app)
 
-ElectionIQ is an AI-powered civic intelligence platform designed to educate, empower, and assist Indian citizens in understanding their democratic rights and the electoral process. 
+ElectionIQ is an AI-powered civic intelligence platform designed to educate, empower, and assist Indian citizens in understanding their democratic rights, verifying their eligibility, and navigating the electoral process with ease.
 
 ---
 
-## 🛑 The Problem We Are Solving
+## 🛑 Why We Built This Project
 
-The Indian electoral process is vast, complex, and deeply rooted in decades of history across 28 states and 8 union territories. For a common citizen—especially first-time voters—accessing clear, unbiased, and consolidated information is a daunting task.
-*   **Scattered Information**: Historical election data, timelines, and political shifts are buried in clunky government websites, massive Wikipedia articles, or biased media portals.
-*   **Misinformation & Confusion**: With the rise of deepfakes and fake news, voters often lack a verified "source of truth" to ask simple questions about their voting rights, EVM security, or candidate eligibility.
-*   **Lack of Civic Engagement**: Traditional civics education is often dry, leading to voter apathy and a lack of awareness regarding powerful tools like **NOTA** (None of the Above).
+The Indian electoral process is a massive, complex machinery involving over 900 million eligible voters across 28 states and 8 union territories. For many citizens—especially first-time voters—accessing clear, unbiased, and actionable information is incredibly difficult. 
 
-## 💡 The ElectionIQ Solution
+We built **ElectionIQ** to solve several critical pain points in the current civic tech landscape:
 
-We built **ElectionIQ** to democratize access to political history and civic knowledge using the power of Generative AI. By acting as a strict, unbiased "Sovereign Intelligence Engine", ElectionIQ transforms how citizens interact with their democracy.
-
-### Core Benefits & Impact:
-*   **Empowers the Voter**: Instantly answers any election-related query, from how to register to vote, to explaining the anti-defection law.
-*   **Unbiased Historical Context**: Allows users to dynamically generate the political timeline of *any* Indian state or the Lok Sabha from **1951 to 2026**.
-*   **Promotes Free & Fair Voting**: Actively advocates that voting is a fundamental duty. The platform educates users to never vote under pressure, and explicitly highlights the power of the NOTA button if no candidate is deemed fit.
+1. **Information Overload & Inaccessibility**: Important information (like checking eligibility, finding polling stations, or understanding the polling day process) is often buried in clunky, hard-to-navigate government websites. ElectionIQ centralizes this into a beautiful, intuitive interface.
+2. **Combating Misinformation**: In an era of deepfakes and biased media, voters need a neutral, verified "source of truth." Our AI assistant acts as an unbiased intelligence engine to answer queries directly without political spin.
+3. **Voter Apathy & Lack of Awareness**: Many young citizens feel disconnected from the political process. By gamifying civic knowledge, providing dynamic historical timelines, and educating users on rights like **NOTA** (None of the Above), we aim to boost voter turnout and engagement.
+4. **Empowering the Sovereign Individual**: Ultimately, democracy works best when voters are informed. We built this platform to put powerful data and AI directly into the hands of the citizen, empowering them to make independent, educated choices.
 
 ---
 
 ## ✨ Key Features
 
 1. **The Sovereign Intelligence Advisor (AI Chat)**
-   * A glassmorphic, interactive chat interface powered by Gemini 2.5 Flash.
-   * Can analyze historical trends, explain EVM protocols, and answer civic queries in real-time.
-   * Features localized chat history previews and secure session purging.
+   - A glassmorphic, interactive chat interface powered by Gemini 2.5 Flash.
+   - Instantly answers civic queries, explains EVM protocols, and analyzes historical trends without bias.
 
-2. **Dynamic AI Historical Timeline Engine**
-   * Select any region (National or specific State) and any year (1951-2026).
-   * The AI acts as a political historian, generating an accurate chronological timeline of that specific election cycle, including polling phases and the resulting Chief Minister / Prime Minister.
+2. **Voter Eligibility Engine 🆕**
+   - A robust tool allowing users to input their Date of Birth and citizenship details.
+   - Calculates exact age dynamically to verify if the user meets the constitutional requirement of being 18+ to vote.
 
-3. **Civic Knowledge Protocol (AI Quiz)**
-   * Tests user's grasp on the electoral process through AI-curated inquiries.
-   * Gamified UI with a progress bar and instant "Intelligence Quotient" feedback.
+3. **Near Poll Station Locator 🆕**
+   - Integrated with the **Nominatim (OpenStreetMap) API** for real-time location suggestions.
+   - Helps users find polling stations near their Pincode, City, or Locality, accompanied by a dynamic interactive map.
 
-4. **Live State Results Tracker**
-   * A persistent footer dropdown providing simulated/live electoral awareness to users across the platform.
+4. **Dynamic AI Historical Timeline**
+   - Select any region (National or specific State) and any year (1951-2026).
+   - The AI acts as a political historian, generating an accurate chronological timeline of that specific election cycle.
 
-5. **Premium Aesthetic & UX**
-   * Built with a modern dark-mode UI, glassmorphism effects, localized Indian voting imagery, and typography driven by the elegant *Figtree* font.
+5. **Polling Day Guide 🆕**
+   - A dedicated section on the homepage detailing the step-by-step process of voting (Verification, Inking, EVM usage).
+   - Includes critical Do's and Don'ts to ensure voters are prepared before heading to the booth.
+
+6. **Civic Knowledge Protocol (AI Quiz)**
+   - Tests user's grasp on the electoral process through AI-curated inquiries with instant "Intelligence Quotient" feedback.
 
 ---
 
 ## 🛠️ Tech Stack
 
-*   **Frontend**: React (Vite), Tailwind CSS v4, Firebase Hosting
-*   **Backend**: Node.js, Express.js, Google Cloud Run
-*   **AI Integration**: Google Gemini API (`gemini-2.5-flash` model)
-*   **Authentication**: Firebase Auth (Google Sign-in)
-*   **Routing**: React Router DOM
+- **Frontend**: React (Vite), Tailwind CSS v4, Framer Motion (Animations)
+- **Backend**: Node.js, Express.js
+- **AI Integration**: Google Gemini API (`gemini-2.5-flash` model)
+- **Maps API**: Nominatim OpenStreetMap API, Google Maps Embeds
+- **Deployment**: Firebase Hosting (Frontend), Google Cloud Run (Backend)
 
 ---
 
 ## 🚀 Running Locally
 
 ### Prerequisites
-* Node.js (v18+)
-* A Google Gemini API Key
-* Firebase Project Setup (for Auth)
+
+- Node.js (v18+)
+- A Google Gemini API Key
+- Firebase Project Setup
 
 ### 1. Setup the Backend
+
 ```bash
 cd backend
 npm install
@@ -73,6 +74,7 @@ npm run dev
 ```
 
 ### 2. Setup the Frontend
+
 ```bash
 cd frontend
 npm install
@@ -82,4 +84,5 @@ npm run dev
 ```
 
 ---
-*“Vote Dena Hamari Duty Hai. Apne adhikar ka azaad istemaal karein. Jai Hind, Jai Bharat 🇮🇳”*
+
+_“Vote Dena Hamari Duty Hai. Apne adhikar ka azaad istemaal karein. Jai Hind, Jai Bharat 🇮🇳”_

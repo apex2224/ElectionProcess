@@ -38,22 +38,25 @@ const Layout = () => {
           <h1 className="text-2xl font-black text-secondary tracking-tighter font-headline">ElectionIQ</h1>
         </Link>
         
-        <nav className="hidden md:flex gap-8">
-          <Link to="/" className="font-headline uppercase tracking-widest text-slate-300 font-medium hover:text-secondary transition-colors">Home</Link>
-          <Link to="/timeline" className="font-headline uppercase tracking-widest text-slate-300 font-medium hover:text-secondary transition-colors">Timeline</Link>
-          <Link to="/chat" className="font-headline uppercase tracking-widest text-slate-300 font-medium hover:text-secondary transition-colors">Chat</Link>
-          <Link to="/quiz" className="font-headline uppercase tracking-widest text-slate-300 font-medium hover:text-secondary transition-colors">Quiz</Link>
-        </nav>
+        <div className="flex items-center gap-8 ml-auto">
+          <nav className="hidden xl:flex gap-6 items-center">
+            <Link to="/" className="font-headline uppercase tracking-widest text-slate-300 font-medium hover:text-secondary transition-colors text-sm">Home</Link>
+            <Link to="/history" className="font-headline uppercase tracking-widest text-slate-300 font-medium hover:text-secondary transition-colors text-sm">History</Link>
+            <Link to="/assistance" className="font-headline uppercase tracking-widest text-slate-300 font-medium hover:text-secondary transition-colors text-sm">Assistance</Link>
+            <Link to="/quiz" className="font-headline uppercase tracking-widest text-slate-300 font-medium hover:text-secondary transition-colors text-sm">Quiz</Link>
+            <Link to="/eligibility" className="font-headline uppercase tracking-widest text-slate-300 font-medium hover:text-secondary transition-colors text-sm">Voter Eligibility</Link>
+            <Link to="/near-poll" className="font-headline uppercase tracking-widest text-slate-300 font-medium hover:text-secondary transition-colors text-sm">Near Poll</Link>
+          </nav>
         
-        <div className="flex items-center gap-4">
-          <button 
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-slate-100 p-2 hover:bg-white/10 rounded-full transition-all"
-          >
-            <span className="material-symbols-outlined">
-              {isMobileMenuOpen ? 'close' : 'menu'}
-            </span>
-          </button>
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="xl:hidden text-slate-100 p-2 hover:bg-white/10 rounded-full transition-all"
+            >
+              <span className="material-symbols-outlined">
+                {isMobileMenuOpen ? 'close' : 'menu'}
+              </span>
+            </button>
           {user ? (
             <div className="hidden md:flex items-center gap-4">
               <span className="text-sm font-headline text-on-surface-variant font-bold">{user.displayName}</span>
@@ -72,6 +75,7 @@ const Layout = () => {
               Sign In
             </button>
           )}
+          </div>
         </div>
       </header>
 
@@ -80,9 +84,11 @@ const Layout = () => {
         <div className="fixed inset-0 top-[72px] bg-[#0a192f]/95 backdrop-blur-3xl z-40 md:hidden border-t border-white/10">
           <nav className="flex flex-col p-8 gap-6">
             <Link onClick={() => setIsMobileMenuOpen(false)} to="/" className="font-headline uppercase tracking-widest text-xl text-slate-300 font-medium hover:text-secondary transition-colors">Home</Link>
-            <Link onClick={() => setIsMobileMenuOpen(false)} to="/timeline" className="font-headline uppercase tracking-widest text-xl text-slate-300 font-medium hover:text-secondary transition-colors">Timeline</Link>
-            <Link onClick={() => setIsMobileMenuOpen(false)} to="/chat" className="font-headline uppercase tracking-widest text-xl text-slate-300 font-medium hover:text-secondary transition-colors">Chat</Link>
+            <Link onClick={() => setIsMobileMenuOpen(false)} to="/history" className="font-headline uppercase tracking-widest text-xl text-slate-300 font-medium hover:text-secondary transition-colors">History</Link>
+            <Link onClick={() => setIsMobileMenuOpen(false)} to="/assistance" className="font-headline uppercase tracking-widest text-xl text-slate-300 font-medium hover:text-secondary transition-colors">Assistance</Link>
             <Link onClick={() => setIsMobileMenuOpen(false)} to="/quiz" className="font-headline uppercase tracking-widest text-xl text-slate-300 font-medium hover:text-secondary transition-colors">Quiz</Link>
+            <Link onClick={() => setIsMobileMenuOpen(false)} to="/eligibility" className="font-headline uppercase tracking-widest text-xl text-slate-300 font-medium hover:text-secondary transition-colors">Voter Eligibility</Link>
+            <Link onClick={() => setIsMobileMenuOpen(false)} to="/near-poll" className="font-headline uppercase tracking-widest text-xl text-slate-300 font-medium hover:text-secondary transition-colors">Near Poll</Link>
             
             <div className="h-px bg-white/10 my-4"></div>
             
@@ -151,9 +157,11 @@ const Layout = () => {
         </div>
         <div className="flex flex-wrap gap-x-8 gap-y-4 md:justify-end items-start h-full pt-2">
           <Link to="/" className="text-sm text-slate-500 hover:text-primary underline-offset-4 hover:underline transition-all">Home</Link>
-          <Link to="/timeline" className="text-sm text-slate-500 hover:text-primary underline-offset-4 hover:underline transition-all">Timeline</Link>
-          <Link to="/chat" className="text-sm text-slate-500 hover:text-primary underline-offset-4 hover:underline transition-all">Chat</Link>
+          <Link to="/history" className="text-sm text-slate-500 hover:text-primary underline-offset-4 hover:underline transition-all">History</Link>
+          <Link to="/assistance" className="text-sm text-slate-500 hover:text-primary underline-offset-4 hover:underline transition-all">Assistance</Link>
           <Link to="/quiz" className="text-sm text-slate-500 hover:text-primary underline-offset-4 hover:underline transition-all">Quiz</Link>
+          <Link to="/eligibility" className="text-sm text-slate-500 hover:text-primary underline-offset-4 hover:underline transition-all">Voter Eligibility</Link>
+          <Link to="/near-poll" className="text-sm text-slate-500 hover:text-primary underline-offset-4 hover:underline transition-all">Near Poll</Link>
         </div>
       </footer>
     </div>

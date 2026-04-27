@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import Timeline from './pages/Timeline';
 import Chat from './pages/Chat';
 import Quiz from './pages/Quiz';
+import Eligibility from './pages/Eligibility';
+import NearPoll from './pages/NearPoll';
 
 function App() {
   return (
@@ -12,9 +14,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="timeline" element={<Timeline />} />
-          <Route path="chat" element={<Chat />} />
+          <Route path="history" element={<Timeline />} />
+          <Route path="assistance" element={<Chat />} />
           <Route path="quiz" element={<Quiz />} />
+          <Route path="eligibility" element={<Eligibility />} />
+          <Route path="near-poll" element={<NearPoll />} />
         </Route>
       </Routes>
     </Router>
